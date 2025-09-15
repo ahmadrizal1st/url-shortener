@@ -2,7 +2,6 @@ package routes
 
 import (
 	"net/http"
-	"os"
 
 	"github.com/Anurag/url-shortner/api/database"
 	"github.com/gin-gonic/gin"
