@@ -9,10 +9,10 @@ func isDefferentDomain(url string) bool {
 		return false
 	}
 
-	cleanUrl := strings. TrimPrefix(url, "http://")
-	cleanURL = strings. TrimPrefix(cleanURL, "https://")
-	cleanURL = strings. TrimPrefix(cleanURL, "www.")
-	cleanURL = strings. Split (cleanURL, "/") [0]
+	cleanUrl := strings.TrimPrefix(url, "http://")
+	cleanURL = strings.TrimPrefix(cleanURL, "https://")
+	cleanURL = strings.TrimPrefix(cleanURL, "www.")
+	cleanURL = strings.Split(cleanURL, "/")[0]
 
 	return cleanURL != domain
 }

@@ -3,11 +3,11 @@ package routes
 import (
 	"net/http"
 
-	"github.com/Anurag/url-shortner/api/database"
+	"github.com/ahmadrizal1st/url-shortner/api/database"
 	"github.com/gin-gonic/gin"
 )
 
-func DeleteURL(c *gin.Context){
+func DeleteURL(c *gin.Context) {
 	shortID := c.Param("shortID")
 
 	r := database.CreateClient(0)

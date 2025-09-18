@@ -4,11 +4,11 @@ import (
 	"net/http"
 	"os"
 
-	"github.com/Anurag/url-shortner/api/database"
+	"github.com/ahmadrizal1st/url-shortner/api/database"
 	"github.com/gin-gonic/gin"
 )
 
-func EditURL(c *gin.Context){
+func EditURL(c *gin.Context) {
 	shortID := c.Param("shortID")
 
 	var body models.Request
@@ -33,5 +33,5 @@ func EditURL(c *gin.Context){
 	}
 
 	c.JSON(http.StatusOK, gin.H{
-		"message": "URL updated successfully",	})
+		"message": "URL updated successfully"})
 }
