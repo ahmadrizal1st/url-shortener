@@ -6,9 +6,10 @@ import (
 	"strconv"
 	"time"
 
-	"github. com/Anurag/url-shortner/api/database"
-	"github. com/Anurag/url-shortner/api/models"
+	"github.com/Anurag/url-shortner/api/database"
+	"github.com/Anurag/url-shortner/api/models"
 	"github.com/Anurag/url-shortner/api/utils"
+	"github.com/asaskevich/govalidator"
 	"github.com/gin-gonic/gin"
 	"github.com/go-redis/redis/v8"
 	"github.com/google/uuid"
@@ -40,12 +41,12 @@ func ShortenURL(c *gin.Context) {
 		}
 	}
 
-	if !govalodor.IsValid(body.URL) {
+	if !govalidator.IsURL(body.URL) {
 		c.JSON(http.StatusBadRequest, gin.H{"error": "Invalid URL"})
 		return
 	}
 
-	if !utils.isDefferentDomain(body.URL) {
+	if !utils.IsDifferentDomain(body.URL) {
 		c.JSON(http.StatusBadRequest, gin.H{"error": "Domain not allowed"})
 		return
 	}
@@ -53,15 +54,15 @@ func ShortenURL(c *gin.Context) {
 	body.URL = utils.EnsureHttPPrefix(body.URL)
 
 	var id string
-	if body. CustomShort == "" {
-		id = uuid.New().string()[:6]
-		} else {
-			id = body.CustomShort
-		}
+	if body.CustomShort == "" {
+		id = uuid.New().String()[:6]
+	} else {
+		id = body.CustomShort
+	}
 
 	r := database.CreateClient(0)
 	defer r.Close()
-	
+
 	val, _ = r.Get(database.Ctx, id).Result()
 	if val != "" {
 		c.JSON(http.StatusConflict, gin.H{"error": "Custom short URL already exists"})
@@ -71,7 +72,7 @@ func ShortenURL(c *gin.Context) {
 	if body.Expiry == 0 {
 		body.Expiry = 24
 	}
-	
+
 	err = r.Set(database.Ctx, id, body.URL, body.Expiry*3600*time.Second).Err()
 
 	if err != nil {
@@ -80,11 +81,11 @@ func ShortenURL(c *gin.Context) {
 	}
 
 	resp := models.Response{
-		URL:         body.URL,
-		CustomShort: "",
-		Expiry:      body.Expiry,
+		URL:             body.URL,
+		CustomShort:     "",
+		Expiry:          body.Expiry,
 		XRateLimitReset: 30,
-		XRateRemaining: 10,
+		XRateRemaining:  10,
 	}
 
 	r2.Decr(database.Ctx, c.ClientIP())
