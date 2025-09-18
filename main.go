@@ -5,10 +5,10 @@ import (
 	"log"
 	"os"
 
+	"github.com/Anurag/url-shortner/api/database"
+	"github.com/Anurag/url-shortner/api/routes"
 	"github.com/gin-gonic/gin"
 	"github.com/joho/godotenv"
-
-	"github.com/Anurag/url-shortner/api/routes"
 )
 
 func main() {
@@ -16,6 +16,8 @@ func main() {
 	if err != nil {
 		fmt.Println(err, "Error loading .env file")
 	}
+
+	database.Inizialize()
 
 	router := gin.Default()
 	setupRouters(router)

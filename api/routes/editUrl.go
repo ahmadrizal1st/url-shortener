@@ -19,17 +19,14 @@ func EditURL(c *gin.Context) {
 		return
 	}
 
-	r := database.CreateClient(0)
-	defer r.Close()
-
-	val, err := r.Get(database.Ctx, shortID).Result()
+	val, err := database.Client.Get(database.Ctx, shortID).Result()
 
 	if err != nil || val == "" {
 		c.JSON(http.StatusNotFound, gin.H{"error": "URL not found"})
 		return
 	}
 
-	err = r.Set(database.Ctx, shortID, body.URL, body.Expiry*3600*time.Second).Err()
+	err = database.Client.Set(database.Ctx, shortID, body.URL, body.Expiry*3600*time.Second).Err()
 	if err != nil {
 		c.JSON(http.StatusInternalServerError, gin.H{"error": "Failed to update URL"})
 		return

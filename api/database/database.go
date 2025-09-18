@@ -6,7 +6,10 @@ import (
 	"os"
 )
 
-var Ctx = context.Background()
+var (
+	Ctx    = context.Background()
+	Client *redis.Client
+)
 
 func CreateClient(dbNo int) *redis.Client {
 	rdb := redis.NewClient(&redis.Options{
@@ -16,4 +19,8 @@ func CreateClient(dbNo int) *redis.Client {
 	})
 
 	return rdb
+}
+
+func Inizialize() {
+	Client = CreateClient(0)
 }
