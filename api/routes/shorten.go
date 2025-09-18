@@ -6,9 +6,10 @@ import (
 	"strconv"
 	"time"
 
-	"github.com/ahmadrizal1st/url-shortner/api/database"
-	"github.com/ahmadrizal1st/url-shortner/api/models"
-	"github.com/ahmadrizal1st/url-shortner/api/utils"
+	"github.com/Anurag/url-shortner/api/database"
+	"github.com/Anurag/url-shortner/api/models"
+	"github.com/Anurag/url-shortner/api/utils"
+	"github.com/asaskevich/govalidator"
 	"github.com/gin-gonic/gin"
 	"github.com/go-redis/redis/v8"
 	"github.com/google/uuid"
@@ -40,12 +41,12 @@ func ShortenURL(c *gin.Context) {
 		}
 	}
 
-	if !govalodor.IsValid(body.URL) {
+	if !govalidator.IsURL(body.URL) {
 		c.JSON(http.StatusBadRequest, gin.H{"error": "Invalid URL"})
 		return
 	}
 
-	if !utils.isDefferentDomain(body.URL) {
+	if !utils.IsDifferentDomain(body.URL) {
 		c.JSON(http.StatusBadRequest, gin.H{"error": "Domain not allowed"})
 		return
 	}
@@ -54,7 +55,7 @@ func ShortenURL(c *gin.Context) {
 
 	var id string
 	if body.CustomShort == "" {
-		id = uuid.New().string()[:6]
+		id = uuid.New().String()[:6]
 	} else {
 		id = body.CustomShort
 	}

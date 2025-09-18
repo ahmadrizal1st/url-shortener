@@ -1,9 +1,10 @@
 package routes
 
 import (
-	"github.com/ahmadrizal1st/url-shortner/api/database"
-	"github.com/gin-gonic/gin"
 	"net/http"
+
+	"github.com/Anurag/url-shortner/api/database"
+	"github.com/gin-gonic/gin"
 )
 
 func GetByShortID(c *gin.Context) {

@@ -1,8 +1,11 @@
 package utils
 
-import "os"
+import (
+	"os"
+	"strings"
+)
 
-func isDefferentDomain(url string) bool {
+func IsDifferentDomain(url string) bool {
 	domain := os.Getenv("DOMAIN")
 
 	if url == domain {
@@ -10,15 +13,15 @@ func isDefferentDomain(url string) bool {
 	}
 
 	cleanUrl := strings.TrimPrefix(url, "http://")
-	cleanURL = strings.TrimPrefix(cleanURL, "https://")
-	cleanURL = strings.TrimPrefix(cleanURL, "www.")
-	cleanURL = strings.Split(cleanURL, "/")[0]
+	cleanUrl = strings.TrimPrefix(cleanUrl, "https://")
+	cleanUrl = strings.TrimPrefix(cleanUrl, "www.")
+	cleanUrl = strings.Split(cleanUrl, "/")[0]
 
-	return cleanURL != domain
+	return cleanUrl != domain
 }
 
 func EnsureHttPPrefix(url string) string {
-	if !strings.HasPrefix(url, "http://") || !strings.HasPrefix(url, "https://") {
+	if !strings.HasPrefix(url, "http://") && !strings.HasPrefix(url, "https://") {
 		return "http://" + url
 	}
 	return url

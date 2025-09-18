@@ -2,9 +2,10 @@ package routes
 
 import (
 	"net/http"
-	"os"
+	"time"
 
-	"github.com/ahmadrizal1st/url-shortner/api/database"
+	"github.com/Anurag/url-shortner/api/database"
+	"github.com/Anurag/url-shortner/api/models"
 	"github.com/gin-gonic/gin"
 )
 
@@ -15,6 +16,7 @@ func EditURL(c *gin.Context) {
 
 	if err := c.ShouldBind(&body); err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": "Invalid request"})
+		return
 	}
 
 	r := database.CreateClient(0)
@@ -24,6 +26,7 @@ func EditURL(c *gin.Context) {
 
 	if err != nil || val == "" {
 		c.JSON(http.StatusNotFound, gin.H{"error": "URL not found"})
+		return
 	}
 
 	err = r.Set(database.Ctx, shortID, body.URL, body.Expiry*3600*time.Second).Err()

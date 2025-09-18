@@ -2,9 +2,10 @@ package routes
 
 import (
 	"encoding/json"
-	"github.com/ahmadrizal1st/url-shortner/api/database"
-	"github.com/gin-gonic/gin"
 	"net/http"
+
+	"github.com/Anurag/url-shortner/api/database"
+	"github.com/gin-gonic/gin"
 )
 
 type TagRequest struct {

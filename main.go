@@ -2,10 +2,13 @@ package main
 
 import (
 	"fmt"
-	"github.com/gin-gonic/gin"
-	"github.com/joho/godotenv"
 	"log"
 	"os"
+
+	"github.com/gin-gonic/gin"
+	"github.com/joho/godotenv"
+
+	"github.com/Anurag/url-shortner/api/routes"
 )
 
 func main() {
@@ -19,7 +22,7 @@ func main() {
 
 	port := os.Getenv("APP_PORT")
 	if port == "" {
-		port = "8080"
+		port = "8000"
 	}
 
 	log.Fatal(router.Run(":" + port))
