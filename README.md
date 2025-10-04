@@ -141,6 +141,7 @@ The project uses the following main Go modules:
 - `PUT /api/v1/:shortID` - Update a short URL
 - `DELETE /api/v1/:shortID` - Delete a short URL
 - `POST /api/v1/tag` - Add tag to a URL
+- `GET /:shortID` - Redirect short URL to real URL
 
 For detailed API documentation with request/response examples, refer to the [testing branch documentation](https://github.com/ahmadrizal1st/url-shortener/tree/testing/#readme).
 
