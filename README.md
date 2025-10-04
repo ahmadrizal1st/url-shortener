@@ -35,7 +35,7 @@ A high-performance URL shortener service built with Go, PostgreSQL, and Redis.
    DB_ADDRESS="localhost:6379"
    DB_PASSWORD=""
    APP_PORT="8000"
-   DOMAIN="localhost:3000"
+   DOMAIN="localhost:5173"
    API_QUOTA=10
    DATABASE_URL="postgres://user:password@localhost:5432/urlshortener?sslmode=disable"
    ```
