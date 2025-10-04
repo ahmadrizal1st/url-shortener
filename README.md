@@ -65,7 +65,7 @@ The application uses the following environment variables:
 | `DB_ADDRESS`  | Redis database address      | `db:6379`        |
 | `DB_PASSWORD` | Redis database password     | Empty            |
 | `APP_PORT`    | Application server port     | `8000`           |
-| `DOMAIN`      | Domain for shortened URLs   | `localhost:3000` |
+| `DOMAIN`      | Domain for shortened URLs   | `localhost:5173` |
 | `API_QUOTA`   | Rate limit quota per window | `10`             |
 
 ### Example .env file
@@ -74,7 +74,7 @@ The application uses the following environment variables:
 DB_ADDRESS="db:6379"
 DB_PASSWORD=""
 APP_PORT="8000"
-DOMAIN="localhost:3000"
+DOMAIN="localhost:5173"
 API_QUOTA=10
 ```
 
